@@ -1,0 +1,84 @@
+@import 'variables';
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.pq-navigation__bar{
+  background-color: white;
+}
+
+.pq-navigation {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.pq-navigation__item {
+  text-decoration: none;
+  color: $pq-default-text-color;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  height: 100%;
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+.pq-navigation__item__placeholder {
+  padding-top: 2px;
+  border-bottom: 2px solid #FFF;
+  font-weight: normal;
+
+  a {
+    color: $pq-default-text-color-lighter
+  }
+}
+
+
+.pq-navigation__item__placeholder--active {
+  border-bottom: 2px solid $pq-primary-color;
+
+  a {
+    color: $pq-default-text-color;
+  }
+}
+
+
+.pq-sidebar__nav__item__placeholder {
+  border-left: 4px solid #FFF;
+  font-weight: normal;
+}
+
+
+.pq-sidebar__nav__item__placeholder--active {
+  border-left: 4px solid $pq-primary-color;
+  font-weight: bold;
+}
+
+
+.logo__text {
+  font-weight: normal;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.logo__text_2nd_part {
+  font-weight: bold;
+}

@@ -1,16 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { ConverterPageComponent } from './converter/converter-page/converter-page.component';
+import { HistoryPageComponent } from './history/history-page/history-page.component';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: LoginPageComponent
+    component: LoginPageComponent,
+    path: 'login'
   },
+  {
+    component: ConverterPageComponent,
+    path: 'converter'
+  },
+  {
+    component: HistoryPageComponent,
+    path: 'history'
+  },
+  {
+    component: LoginPageComponent,
+    path: 'logout'
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes)]
 })
 export class AppRoutingModule {}

@@ -1,22 +1,24 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import {
   MatBadgeModule,
   MatButtonModule,
   MatCardModule,
-  MatOptionModule,
+  MatDialogModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatOptionModule,
+  MatSelectModule,
   MatSidenavModule,
   MatToolbarModule,
-  MatTooltipModule,
-  MatGridListModule, MatSelectModule, MatDialogModule
+  MatTooltipModule
 } from '@angular/material';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const matModules = [
   FlexLayoutModule,
@@ -40,7 +42,7 @@ const matModules = [
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, ...matModules],
-  exports: [BrowserAnimationsModule, ...matModules]
+  exports: [BrowserAnimationsModule, ...matModules],
+  imports: [CommonModule, ...matModules]
 })
 export class MdmModule {}
