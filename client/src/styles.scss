@@ -14,9 +14,6 @@
 // hue. Available color palettes: https://material.io/design/color/
 @import 'pq-palette';
 
-$pq-default-text : #404040;
-$pq-table-header-text : #8d8d8d;
-
 
 $client-primary: mat-palette($mat-pq-primary);
 $client-accent: mat-palette($mat-pq-accent);
@@ -33,5 +30,14 @@ $client-theme: mat-light-theme($client-primary, $client-accent, $client-warn);
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$custom-typography: mat-typography-config(
+        $font-family: 'Roboto, monospace',
+        $headline: mat-typography-level(48px, 48px, bold),
+        $title: mat-typography-level(16px, 16px, bold),
+        $body-1: mat-typography-level(16px, 16px)
+);
+
+@include angular-material-typography($custom-typography);
+
+@import 'styles/body';

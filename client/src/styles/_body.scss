@@ -1,0 +1,9 @@
+@import 'variables';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  background-color: $pq-body-color;
+  color: $pq-default-text-color;
+}

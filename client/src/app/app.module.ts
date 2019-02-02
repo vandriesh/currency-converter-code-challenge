@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MdmModule } from './mdm/mdm.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { MdmModule } from './mdm/mdm.module';
   ],
   imports: [
     MdmModule,
+    LoginModule,
     BrowserModule,
     AppRoutingModule,
   ],
