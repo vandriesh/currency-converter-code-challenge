@@ -1,4 +1,7 @@
-<h1 class="mat-display-2 page__header">I want to convert</h1>
+<div class="container">
+<div class="content__row">
+    <h1 class="mat-display-2 page__header">I want to convert</h1>
+</div>
 
 <form
     [formGroup]="convertForm" novalidate (ngSubmit)="onSubmit()" class="content__section">
@@ -67,3 +70,4 @@
     1 {{ get('toField')}} = {{convert(1, 1/0.8)}} {{get('fromField')}}
 </div>
 <!--<hr class="section__delimiter" />-->
+</div>

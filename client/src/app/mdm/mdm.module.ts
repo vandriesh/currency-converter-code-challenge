@@ -13,6 +13,7 @@ import {
   MatOptionModule,
   MatSelectModule,
   MatSidenavModule,
+  MatTableModule,
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
@@ -36,6 +37,7 @@ const matModules = [
   MatOptionModule,
   MatSelectModule,
   MatSidenavModule,
+  MatTableModule,
   MatToolbarModule,
   MatCardModule
 ];

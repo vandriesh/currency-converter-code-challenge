@@ -6,10 +6,22 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './history-page.component.html'
 })
 export class HistoryPageComponent implements OnInit {
+  displayedColumns = ['Date', 'Event', 'Actions'];
 
-  constructor() { }
+  dataSource = [];
+  currencies = ['USD', 'EUR', 'GBP'];
 
-  ngOnInit() {
+  constructor() {
+    for (let i = 0; i < 20; i++) {
+      const from = this.currencies[i % 3];
+      const to = this.currencies[(i + 1) % 3];
+      this.dataSource.push({
+        Date: Date.now(),
+        Event: `${from} to ${to}`
+      });
+    }
+
   }
 
+  ngOnInit() {}
 }

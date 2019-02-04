@@ -1,3 +1,53 @@
+@import "~@angular/flex-layout/mq";
+
+.container {
+  margin: 0 auto;
+  width: 1024px;
+
+}
+
+.toolbar__container {
+  padding-left: 20px;
+}
+
+@include layout-bp(xs) {
+  .container {
+    width: 100%;
+  }
+}
+@include layout-bp(sm) {
+  .container {
+    width: 100%;
+  }
+}
+//
+//@include layout-bp(md) {
+//  .container {
+//    width: 1024px;
+//  }
+//}
+//
+//@include layout-bp(lg) {
+//  .container {
+//    width: 1024px;
+//  }
+//}
+//
+//@include layout-bp(xl) {
+//  .container {
+//    width: 1024px;
+//  }
+//}
+//
+
+.placeholder {
+  border: 1px solid red;
+}
+
 .content__section {
   margin-bottom: 50px;
+}
+
+.content__row {
+  padding: 0 10px;
 }

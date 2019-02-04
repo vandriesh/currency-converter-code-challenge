@@ -1,12 +1,21 @@
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+
 import { AppComponent } from './app.component';
+import { ConverterModule } from './converter/converter.module';
+import { HistoryModule } from './history/history.module';
+import { PqLayoutModule } from './pq-layout/pq-layout.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent]
+      declarations: [AppComponent],
+      imports: [
+        RouterTestingModule,
+        HistoryModule,
+        ConverterModule,
+        PqLayoutModule
+      ]
     }).compileComponents();
   }));
 

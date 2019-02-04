@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MdmModule } from '../../mdm/mdm.module';
+
 import { HistoryPageComponent } from './history-page.component';
 
 describe('HistoryPageComponent', () => {
@@ -8,7 +10,8 @@ describe('HistoryPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistoryPageComponent ]
+      declarations: [ HistoryPageComponent ],
+      imports: [MdmModule]
     })
     .compileComponents();
   }));

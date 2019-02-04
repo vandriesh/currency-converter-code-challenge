@@ -4,40 +4,38 @@
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="false">
         <mat-toolbar>Menu</mat-toolbar>
-        <mat-nav-list
-        >
+        <mat-nav-list>
             <a mat-list-item *ngFor="let menuItem of menu"
                 class="pq-sidebar__nav__item__placeholder"
                 routerLinkActive="pq-sidebar__nav__item__placeholder--active"
                 [routerLink]="[menuItem.path]"
-                [routerLinkActiveOptions]="{exact:true}"
-            >{{menuItem.label}}</a>
+                [routerLinkActiveOptions]="{exact:true}">{{menuItem.label}}</a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar class="mat-elevation-z1 pq-navigation__bar">
-            <button
-                type="button"
-                aria-label="Toggle sidenav"
-                mat-icon-button
-                (click)="drawer.toggle()"
-                *ngIf="isHandset$ | async">
-                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-            </button>
-            <mat-icon color="primary">youtube_searched_for</mat-icon>
-            <span class="logo__text">Currency<span class="logo__text_2nd_part">Exchange</span></span>
-            <ul class="pq-navigation" fxLayoutAlign fxHide.xs>
-                <li *ngFor="let menuItem of menu"
-                    [routerLinkActiveOptions]="{exact:true}"
-                    class="pq-navigation__item__placeholder"
-                    routerLinkActive="pq-navigation__item__placeholder--active zzz"
-                    fxFlex>
-                    <a [routerLink]="[menuItem.path]" class="pq-navigation__item"
-
-                    >{{menuItem.label}}</a>
-                </li>
-            </ul>
-            <button mat-button color="primary" fxLayoutAlign="end center">LOGOUT</button>
+            <div class="container toolbar__container" fxLayoutAlign="start center" style="height: 100%">
+                <button
+                    type="button"
+                    aria-label="Toggle sidenav"
+                    mat-icon-button
+                    (click)="drawer.toggle()"
+                    *ngIf="isHandset$ | async">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+                <mat-icon color="primary">youtube_searched_for</mat-icon>
+                <span class="logo__text">Currency<span class="logo__text_2nd_part">Exchange</span></span>
+                <ul class="pq-navigation" fxLayoutAlign fxHide.xs>
+                    <li *ngFor="let menuItem of menu"
+                        [routerLinkActiveOptions]="{exact:true}"
+                        class="pq-navigation__item__placeholder"
+                        routerLinkActive="pq-navigation__item__placeholder--active"
+                        fxFlex>
+                        <a [routerLink]="[menuItem.path]" class="pq-navigation__item">{{menuItem.label}}</a>
+                    </li>
+                </ul>
+                <button mat-button color="primary" class="button-logout">LOGOUT</button>
+            </div>
         </mat-toolbar>
         <ng-content></ng-content>
     </mat-sidenav-content>
