@@ -7,3 +7,27 @@ body {
   background-color: $pq-body-color;
   color: $pq-default-text-color;
 }
+
+.page__header {
+  font-weight: 700;
+  font-size: 45px;
+  letter-spacing: 0.03em;
+}
+
+.pq-button__icon {
+  padding: 0 !important;
+  min-width: 36px !important;
+  height: 36px;
+}
+
+
+.text--center {
+  text-align: center;
+}
+
+.section__delimiter {
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom:  1px solid #eee
+}

@@ -3,13 +3,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  styleUrls: ['./login-form.component.scss'],
+  templateUrl: './login-form.component.html'
 })
 export class LoginFormComponent {
   loginForm = this.fb.group({
-    username: [null, Validators.required],
-    password: [null, Validators.required]
+    password: [null, Validators.required],
+    username: [null, Validators.required]
   });
 
   constructor(private fb: FormBuilder) {}

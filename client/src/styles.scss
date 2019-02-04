@@ -41,3 +41,4 @@ $custom-typography: mat-typography-config(
 @include angular-material-typography($custom-typography);
 
 @import 'styles/body';
+@import 'styles/content';
