@@ -14,7 +14,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar class="mat-elevation-z1 pq-navigation__bar">
-            <div class="container toolbar__container" fxLayoutAlign="start center" style="height: 100%">
+            <div class="container" fxLayoutAlign="start center" style="height: 100%">
                 <button
                     type="button"
                     aria-label="Toggle sidenav"
@@ -23,7 +23,7 @@
                     *ngIf="isHandset$ | async">
                     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
                 </button>
-                <mat-icon color="primary">youtube_searched_for</mat-icon>
+                <mat-icon color="primary" style="padding-left: 20px">youtube_searched_for</mat-icon>
                 <span class="logo__text">Currency<span class="logo__text_2nd_part">Exchange</span></span>
                 <ul class="pq-navigation" fxLayoutAlign fxHide.xs>
                     <li *ngFor="let menuItem of menu"

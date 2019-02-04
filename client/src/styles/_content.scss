@@ -6,10 +6,6 @@
 
 }
 
-.toolbar__container {
-  padding-left: 20px;
-}
-
 @include layout-bp(xs) {
   .container {
     width: 100%;
@@ -20,25 +16,6 @@
     width: 100%;
   }
 }
-//
-//@include layout-bp(md) {
-//  .container {
-//    width: 1024px;
-//  }
-//}
-//
-//@include layout-bp(lg) {
-//  .container {
-//    width: 1024px;
-//  }
-//}
-//
-//@include layout-bp(xl) {
-//  .container {
-//    width: 1024px;
-//  }
-//}
-//
 
 .placeholder {
   border: 1px solid red;

@@ -1,4 +1,5 @@
-@import "variables";
+@import 'variables';
+@import 'layout-bp';
 
 .convert__result {
   font-weight: 100;
@@ -10,4 +11,21 @@
   font-weight: bold;
 }
 
+.full-width,
+.pq-converter__dropdown .mat-select .mat-form-field-infix {
+  width: 300px;
+}
 
+@include layout-bp(sm) {
+  .full-width-lt-sm {
+    width: 300px;
+  }
+
+  .rotate-90-lt-sm {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}

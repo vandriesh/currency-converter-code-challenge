@@ -1,73 +1,71 @@
-<div class="container">
-<div class="content__row">
-    <h1 class="mat-display-2 page__header">I want to convert</h1>
-</div>
-
-<form
-    [formGroup]="convertForm" novalidate (ngSubmit)="onSubmit()" class="content__section">
-    <div class="row">
-        <div class="col">
-            <mat-form-field class="full-width">
-                <input matInput placeholder="Amount" formControlName="amount" class="form__field" />
-                <mat-error *ngIf="convertForm.controls['amount'].hasError('required')">
-                    Amount is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col">
-            <mat-form-field class="full-width">
-                <mat-select placeholder="From" formControlName="fromField">
-                    <mat-option *ngFor="let currency of currencies" [value]="currency">
-                        {{ currency }}
-                    </mat-option>
-                </mat-select>
-                <mat-error
-                    *ngIf="convertForm.controls['fromField'].hasError('required')">
-                    To is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col">
-            <button mat-raised-button (click)="swapCurrencies()" class="pq-button__icon">
-                <mat-icon>compare_arrows</mat-icon>
-            </button>
-        </div>
-        <div class="col">
-            <mat-form-field class="full-width">
-                <mat-select placeholder="To" formControlName="toField">
-                    <mat-option *ngFor="let currency of currencies" [value]="currency">
-                        {{ currency }}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="convertForm.controls['toField'].hasError('required')">
-                    To is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col">
-            <button
-                mat-raised-button
-                color="primary"
-                type="submit"
-                [disabled]="!validForm()">
-                CONVERT
-            </button>
-        </div>
+<div class="container" fxLayout="column">
+    <div class="content__row">
+        <h1 class="mat-display-2 page__header">I want to convert</h1>
     </div>
-</form>
+    <div>
+        <form [formGroup]="convertForm" novalidate (ngSubmit)="onSubmit()" class="content__section" style="width: 100%">
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <div>
+                    <mat-form-field class="full-width-lt-sm">
+                        <input matInput placeholder="Amount" formControlName="amount" class="form__field" />
+                        <mat-error *ngIf="convertForm.controls['amount'].hasError('required')">
+                            Amount is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="pq-converter__dropdown" fxFlex>
+                    <mat-form-field class="full-width">
+                        <mat-select placeholder="From" formControlName="fromField">
+                            <mat-option *ngFor="let currency of currencies" [value]="currency">
+                                {{ currency }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="convertForm.controls['fromField'].hasError('required')">
+                            To is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxFlex fxLayoutAlign="center">
+                    <button mat-raised-button (click)="swapCurrencies()" class="pq-button__icon">
+                        <mat-icon class="rotate-90-lt-sm">compare_arrows</mat-icon>
+                    </button>
+                </div>
+                <div class="pq-converter__dropdown" fxFlex>
+                    <mat-form-field class="full-width">
+                        <mat-select placeholder="To" formControlName="toField">
+                            <mat-option *ngFor="let currency of currencies" [value]="currency">
+                                {{ currency }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="convertForm.controls['toField'].hasError('required')">
+                            To is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    type="submit"
+                    [disabled]="!validForm()">
+                    CONVERT
+                </button>
+            </div>
+        </form>
+    </div>
 
-<h1 class="mat-display-2 convert__result">
-    <span>{{ get('amount')}} {{ get('fromField')}}</span>
-    =
-    <span class="convert__result__out">{{ convertedAmount() }}
-        &nbsp;{{ get('toField') }}</span>
-</h1>
+    <h1 class="mat-display-2 convert__result" fxFlex fxLayoutAlign="center center">
+        <span>{{ get('amount')}} {{ get('fromField')}}</span>
+        =
+        <span class="convert__result__out">{{ convertedAmount() }}
+            &nbsp;{{ get('toField') }}</span>
+    </h1>
 
-<div class="text--center">
-    1 {{ get('fromField')}} = {{convert(1, 0.8)}} {{get('toField')}}
-</div>
-<div class="text--center">
-    1 {{ get('toField')}} = {{convert(1, 1/0.8)}} {{get('fromField')}}
-</div>
-<!--<hr class="section__delimiter" />-->
+    <div class="text--center">
+        1 {{ get('fromField')}} = {{convert(1, 0.8)}} {{get('toField')}}
+    </div>
+    <div class="text--center">
+        1 {{ get('toField')}} = {{convert(1, 1 / 0.8)}} {{get('fromField')}}
+    </div>
+    <!--<hr class="section__delimiter" />-->
 </div>
