@@ -4,12 +4,14 @@ import {
   Currency,
   CurrencyOperation
 } from '../features/currencies/currencies.service';
+import { LoggedUser } from '../login/auth/user';
 
 const STORAGE_KEY = 'pq_settings';
 
 interface AppSettings {
   CURRENCY_OPERATIONS: CurrencyOperation[];
   CURRENCIES: Currency[];
+  CURRENT_USER: LoggedUser;
 }
 
 const defaultSettings = {} as AppSettings;

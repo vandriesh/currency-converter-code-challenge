@@ -1,5 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
+        *ngIf="logged"
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="false">
@@ -20,12 +21,13 @@
                     aria-label="Toggle sidenav"
                     mat-icon-button
                     (click)="drawer.toggle()"
-                    *ngIf="isHandset$ | async">
+                    *ngIf="logged && (isHandset$ | async)">
                     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
                 </button>
                 <mat-icon color="primary" style="padding-left: 20px">youtube_searched_for</mat-icon>
                 <span class="logo__text">Currency<span class="logo__text_2nd_part">Exchange</span></span>
-                <ul class="pq-navigation" fxLayoutAlign fxHide.xs>
+                <ul *ngIf="logged"
+                    class="pq-navigation" fxLayoutAlign fxHide.xs>
                     <li *ngFor="let menuItem of menu"
                         [routerLinkActiveOptions]="{exact:true}"
                         class="pq-navigation__item__placeholder"
@@ -34,7 +36,9 @@
                         <a [routerLink]="[menuItem.path]" class="pq-navigation__item">{{menuItem.label}}</a>
                     </li>
                 </ul>
-                <button mat-button color="primary" class="button-logout">LOGOUT</button>
+                <button
+                    *ngIf="logged"
+                    mat-button color="primary" class="button-logout" (click)="logout()">LOGOUT</button>
             </div>
         </mat-toolbar>
         <ng-content></ng-content>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ConverterPageComponent } from './converter/converter-page/converter-page.component';
 import { HistoryPageComponent } from './history/history-page/history-page.component';
+import { AuthGuard } from './login/auth/auth.guard';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 
 const routes: Routes = [
@@ -16,10 +17,12 @@ const routes: Routes = [
     redirectTo : '/converter'
   },
   {
+    canActivate: [AuthGuard],
     component: ConverterPageComponent,
     path: 'converter'
   },
   {
+    canActivate: [AuthGuard],
     component: HistoryPageComponent,
     path: 'history'
   },
@@ -31,6 +34,7 @@ const routes: Routes = [
 
 @NgModule({
   exports: [RouterModule],
-  imports: [RouterModule.forRoot(routes)]
+  imports: [RouterModule.forRoot(routes)],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule {}

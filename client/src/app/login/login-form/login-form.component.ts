@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
+import { UserCredentials } from '../auth/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -7,6 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: './login-form.component.html'
 })
 export class LoginFormComponent {
+  @Output() login: EventEmitter<UserCredentials> = new EventEmitter();
   loginForm = this.fb.group({
     password: [null, Validators.required],
     username: [null, Validators.required]
@@ -15,7 +18,13 @@ export class LoginFormComponent {
   constructor(private fb: FormBuilder) {}
 
   onSubmit() {
-    alert('Thanks!');
+    const loginForm = this.loginForm;
+
+    if (this.validForm()) {
+      const userName = loginForm.controls['username'].value;
+      const password = loginForm.controls['password'].value;
+      this.login.emit({ userName, password });
+    }
   }
 
   validForm() {

@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MdmModule } from '../../mdm/mdm.module';
 import { LoginFormComponent } from '../login-form/login-form.component';
@@ -13,7 +14,7 @@ describe('LoginPageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LoginPageComponent, LoginFormComponent],
-      imports: [MdmModule, ReactiveFormsModule]
+      imports: [MdmModule, ReactiveFormsModule, RouterTestingModule]
     }).compileComponents();
   }));
 

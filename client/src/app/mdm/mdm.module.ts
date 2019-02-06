@@ -14,6 +14,7 @@ import {
   MatOptionModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatTableModule,
   MatToolbarModule,
   MatTooltipModule
@@ -39,6 +40,7 @@ const matModules = [
   MatOptionModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatTableModule,
   MatToolbarModule,
   MatCardModule

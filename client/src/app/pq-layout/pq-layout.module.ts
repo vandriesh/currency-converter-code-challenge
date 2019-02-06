@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { LoginModule } from '../login/login.module';
 import { MdmModule } from '../mdm/mdm.module';
 
 import { PqNavigationComponent } from './pq-navigation/pq-navigation.component';
@@ -16,6 +17,7 @@ import { PqNavigationComponent } from './pq-navigation/pq-navigation.component';
     CommonModule,
     LayoutModule,
     RouterModule,
+    LoginModule,
     MdmModule,
   ]
 })
