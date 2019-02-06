@@ -1,17 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
-const NOMICS_API_KEY = ''
+import { environment } from '../../../environments/environment';
+
+const { NOMICS_API_KEY } = environment;
+
+export interface Currency {
+  currency: string;
+  rate: string;
+  timestamp: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrenciesService {
-  private nomicsUrl = 'https://api.nomics.com/v1';
+  public static nomicsUrl = 'https://api.nomics.com/v1';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
-  getExchangeRates () {
-    return this.httpClient.get(`${this.nomicsUrl}/exchange-rates?key=${NOMICS_API_KEY}`)
+  static getRate(from: Currency, to: Currency): number {
+    const fromRate = parseFloat(from.rate);
+    const toRate = parseFloat(to.rate);
+
+    return fromRate / toRate;
+  }
+
+  getExchangeRates(): Observable<Currency[]> {
+    return this.httpClient.get<Currency[]>(
+      `${CurrenciesService.nomicsUrl}/exchange-rates?key=${NOMICS_API_KEY}`
+    );
   }
 }

@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  NOMICS_API_KEY: '2732f3948dd1f5fe9462495bb950fbf7',
   production: false
 };
 

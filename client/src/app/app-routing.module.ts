@@ -11,6 +11,11 @@ const routes: Routes = [
     path: 'login'
   },
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo : '/converter'
+  },
+  {
     component: ConverterPageComponent,
     path: 'converter'
   },

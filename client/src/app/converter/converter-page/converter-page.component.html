@@ -2,7 +2,7 @@
     <div class="content__row">
         <h1 class="mat-display-2 page__header">I want to convert</h1>
     </div>
-    <div>
+    <div *ngIf="convertForm">
         <form [formGroup]="convertForm" novalidate (ngSubmit)="onSubmit()" class="content__section" style="width: 100%">
             <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center" fxLayoutGap="10px">
                 <div>
@@ -54,7 +54,8 @@
         </form>
     </div>
 
-    <h1 class="mat-display-2 convert__result" fxFlex fxLayoutAlign="center center">
+    <div *ngIf="convertForm">
+    <h1 class="mat-display-2 convert__result text--center">
         <span>{{ get('amount')}} {{ get('fromField')}}</span>
         =
         <span class="convert__result__out">{{ convertedAmount() }}
@@ -62,10 +63,11 @@
     </h1>
 
     <div class="text--center">
-        1 {{ get('fromField')}} = {{convert(1, 0.8)}} {{get('toField')}}
+        {{displayFromRate('fromField', 'toField')}}
     </div>
     <div class="text--center">
-        1 {{ get('toField')}} = {{convert(1, 1 / 0.8)}} {{get('fromField')}}
+        {{displayFromRate('toField', 'fromField')}}
+    </div>
     </div>
     <!--<hr class="section__delimiter" />-->
 </div>

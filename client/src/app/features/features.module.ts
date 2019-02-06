@@ -1,15 +1,12 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { CurrenciesService } from './currencies/currencies.service';
 
 @NgModule({
   declarations: [],
-  exports: [
-    CurrenciesService
-  ],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule, HttpClientModule],
+  providers: [CurrenciesService]
 })
-export class FeaturesModule { }
+export class FeaturesModule {}

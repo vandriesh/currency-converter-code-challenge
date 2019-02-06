@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { CurrenciesService } from '../../features/currencies/currencies.service';
+import { FeaturesModule } from '../../features/features.module';
 import { MdmModule } from '../../mdm/mdm.module';
 
 import { ConverterPageComponent } from './converter-page.component';
@@ -12,7 +14,8 @@ describe('ConverterPageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ConverterPageComponent],
-      imports: [ReactiveFormsModule, MdmModule]
+      imports: [ReactiveFormsModule, MdmModule, FeaturesModule],
+      providers: [CurrenciesService]
     }).compileComponents();
   }));
 
