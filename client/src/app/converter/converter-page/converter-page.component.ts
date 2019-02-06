@@ -5,6 +5,9 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
 import {
   CurrenciesService,
   Currency
@@ -28,6 +31,9 @@ export class ConverterPageComponent implements OnInit {
     [key: string]: Currency;
   } = {};
 
+  filteredOptionsFrom: Observable<string[]>;
+  filteredOptionsTo: Observable<string[]>;
+
   constructor(
     private fb: FormBuilder,
     private currenciesService: CurrenciesService
@@ -47,6 +53,20 @@ export class ConverterPageComponent implements OnInit {
           fromField: ['USD', Validators.required],
           toField: ['EUR', Validators.required]
         });
+
+        this.filteredOptionsFrom = this.convertForm.controls[
+          'fromField'
+        ].valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+
+        this.filteredOptionsTo = this.convertForm.controls[
+          'toField'
+        ].valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
       });
   }
 
@@ -116,6 +136,15 @@ export class ConverterPageComponent implements OnInit {
     );
 
     return `1 ${leftCurrency.currency} = ${rate} ${rightCurrency.currency}`;
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    console.log('val', value);
+    return this.currencies.filter(
+      option => option.toLowerCase().indexOf(filterValue) === 0
+    );
   }
 
   private getCurrency(controllerName): NullCurrency {

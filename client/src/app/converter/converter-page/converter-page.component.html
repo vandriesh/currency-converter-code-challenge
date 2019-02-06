@@ -15,15 +15,12 @@
                 </div>
                 <div class="pq-converter__dropdown" fxFlex>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="From" formControlName="fromField">
-                            <mat-option *ngFor="let currency of currencies" [value]="currency">
-                                {{ currency }}
+                        <input type="text" placeholder="From" aria-label="Currency" matInput formControlName="fromField" [matAutocomplete]="fromAutocomplete">
+                        <mat-autocomplete autoActiveFirstOption #fromAutocomplete="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptionsFrom | async" [value]="option">
+                                {{option}}
                             </mat-option>
-                        </mat-select>
-                        <mat-error
-                            *ngIf="convertForm.controls['fromField'].hasError('required')">
-                            To is <strong>required</strong>
-                        </mat-error>
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
                 <div fxFlex fxLayoutAlign="center">
@@ -33,14 +30,12 @@
                 </div>
                 <div class="pq-converter__dropdown" fxFlex>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="To" formControlName="toField">
-                            <mat-option *ngFor="let currency of currencies" [value]="currency">
-                                {{ currency }}
+                        <input type="text" placeholder="To" aria-label="NumCurrencyber" matInput formControlName="toField" [matAutocomplete]="toAutocomplete">
+                        <mat-autocomplete autoActiveFirstOption #toAutocomplete="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptionsTo | async" [value]="option">
+                                {{option}}
                             </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="convertForm.controls['toField'].hasError('required')">
-                            To is <strong>required</strong>
-                        </mat-error>
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
                 <button

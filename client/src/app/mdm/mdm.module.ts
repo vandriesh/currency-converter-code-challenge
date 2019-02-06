@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
+  MatAutocompleteModule,
   MatBadgeModule,
   MatButtonModule,
   MatCardModule,
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const matModules = [
   FlexLayoutModule,
+  MatAutocompleteModule,
   MatButtonModule,
   MatDialogModule,
   MatIconModule,
