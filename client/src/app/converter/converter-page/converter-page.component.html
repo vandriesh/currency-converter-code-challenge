@@ -11,11 +11,15 @@
                         <mat-error *ngIf="convertForm.controls['amount'].hasError('required')">
                             Amount is required
                         </mat-error>
+                        <mat-error *ngIf="convertForm.controls['amount'].hasError('notEmptyNumber')">
+                            Amount should be number
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="pq-converter__dropdown" fxFlex>
                     <mat-form-field class="full-width">
-                        <input type="text" placeholder="From" aria-label="Currency" matInput formControlName="fromField" [matAutocomplete]="fromAutocomplete">
+                        <input type="text" placeholder="From" aria-label="Currency" matInput formControlName="fromField"
+                            [matAutocomplete]="fromAutocomplete">
                         <mat-autocomplete autoActiveFirstOption #fromAutocomplete="matAutocomplete">
                             <mat-option *ngFor="let option of filteredOptionsFrom | async" [value]="option">
                                 {{option}}
@@ -30,7 +34,8 @@
                 </div>
                 <div class="pq-converter__dropdown" fxFlex>
                     <mat-form-field class="full-width">
-                        <input type="text" placeholder="To" aria-label="NumCurrencyber" matInput formControlName="toField" [matAutocomplete]="toAutocomplete">
+                        <input type="text" placeholder="To" aria-label="Currency" matInput formControlName="toField"
+                            [matAutocomplete]="toAutocomplete">
                         <mat-autocomplete autoActiveFirstOption #toAutocomplete="matAutocomplete">
                             <mat-option *ngFor="let option of filteredOptionsTo | async" [value]="option">
                                 {{option}}
@@ -42,27 +47,24 @@
                     mat-raised-button
                     color="primary"
                     type="submit"
-                    [disabled]="!validForm()">
-                    CONVERT
+                    [disabled]="!validForm()">CONVERT
                 </button>
             </div>
         </form>
-    </div>
 
-    <div *ngIf="convertForm">
-    <h1 class="mat-display-2 convert__result text--center">
-        <span>{{ get('amount')}} {{ get('fromField')}}</span>
-        =
-        <span class="convert__result__out">{{ convertedAmount() }}
-            &nbsp;{{ get('toField') }}</span>
-    </h1>
+        <h1 class="mat-display-2 convert__result text--center">
+            <span>{{ get('amount')}} {{ get('fromField')}}</span>
+            =
+            <span class="convert__result__out">{{ convertedAmount() }}
+                &nbsp;{{ get('toField') }}</span>
+        </h1>
 
-    <div class="text--center">
-        {{displayFromRate('fromField', 'toField')}}
-    </div>
-    <div class="text--center">
-        {{displayFromRate('toField', 'fromField')}}
-    </div>
+        <div class="text--center">
+            {{displayFromRate('fromField', 'toField')}}
+        </div>
+        <div class="text--center">
+            {{displayFromRate('toField', 'fromField')}}
+        </div>
     </div>
     <!--<hr class="section__delimiter" />-->
 </div>

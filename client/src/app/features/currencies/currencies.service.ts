@@ -12,6 +12,14 @@ export interface Currency {
   timestamp: string;
 }
 
+export interface CurrencyOperation {
+  id: string;
+  amount: string;
+  from: Currency;
+  to: Currency;
+  timestamp: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })

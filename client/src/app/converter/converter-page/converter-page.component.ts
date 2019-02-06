@@ -3,6 +3,7 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
+  ValidatorFn,
   Validators
 } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -12,12 +13,28 @@ import {
   CurrenciesService,
   Currency
 } from '../../features/currencies/currencies.service';
+import { LocalStorageService } from '../../storage/local-storage.service';
 
 type FieldControl = 'fromField' | 'toField';
 type NullCurrency = Currency | null;
 
 const notEmptyAndValid = (control: AbstractControl) =>
   control.value !== '' && control.valid;
+
+export function notEmptyNumber(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const { value } = control;
+    const empty = value === '';
+
+    const number = !isNaN(value);
+
+    if (empty || number) {
+      return null;
+    }
+
+    return { notEmptyNumber: { value } };
+  };
+}
 
 @Component({
   selector: 'app-converter-page',
@@ -36,38 +53,42 @@ export class ConverterPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private currenciesService: CurrenciesService
+    private currenciesService: CurrenciesService,
+    private storage: LocalStorageService
   ) {}
 
   ngOnInit() {
-    this.currenciesService
-      .getExchangeRates()
-      .subscribe((currencyRates: Currency[]) => {
-        currencyRates.forEach((item: Currency) => {
-          this.currencyRates[item.currency] = item;
-          this.currencies.push(item.currency);
+    const currenciesStoredLocally = this.storage.get('CURRENCIES');
+
+    if (currenciesStoredLocally) {
+      this.initForm(currenciesStoredLocally);
+    } else {
+      this.currenciesService
+        .getExchangeRates()
+        .subscribe((currencyRates: Currency[]) => {
+          this.initForm(currencyRates);
         });
+    }
 
-        this.convertForm = this.fb.group({
-          amount: ['100', Validators.required],
-          fromField: ['USD', Validators.required],
-          toField: ['EUR', Validators.required]
-        });
+    this.convertForm = this.fb.group({
+      amount: ['100', [Validators.required, notEmptyNumber()]],
+      fromField: [{ value: 'USD', disabled: true }, Validators.required],
+      toField: [{ value: 'EUR', disabled: true }, Validators.required]
+    });
 
-        this.filteredOptionsFrom = this.convertForm.controls[
-          'fromField'
-        ].valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value))
-        );
+    this.filteredOptionsFrom = this.convertForm.controls[
+      'fromField'
+    ].valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
 
-        this.filteredOptionsTo = this.convertForm.controls[
-          'toField'
-        ].valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value))
-        );
-      });
+    this.filteredOptionsTo = this.convertForm.controls[
+      'toField'
+    ].valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
 
   validForm() {
@@ -79,9 +100,11 @@ export class ConverterPageComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('amount:', this.convertForm.controls['amount'].value);
-    console.log('from:', this.convertForm.controls['fromField'].value);
-    console.log('to :', this.convertForm.controls['toField'].value);
+    const amount = this.getVal('amount');
+    const from = this.getCurrency('fromField');
+    const to = this.getCurrency('toField');
+
+    this.storage.addOperation({ amount, from, to });
   }
 
   convertedAmount() {
@@ -141,7 +164,6 @@ export class ConverterPageComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    console.log('val', value);
     return this.currencies.filter(
       option => option.toLowerCase().indexOf(filterValue) === 0
     );
@@ -153,15 +175,25 @@ export class ConverterPageComponent implements OnInit {
     return this.currencyRates[currencyName] || null;
   }
 
-  private getVal(controlName: string) {
+  private getVal(controlName: string): string {
     if (notEmptyAndValid(this.convertForm.controls[controlName])) {
       return this.convertForm.controls[controlName].value;
     }
 
-    return null;
+    return '';
   }
 
   private round(num: number, digitCount: number) {
     return Number(num).toFixed(digitCount);
+  }
+
+  private initForm(currencyRates: Currency[]) {
+    currencyRates.forEach((item: Currency) => {
+      this.currencyRates[item.currency] = item;
+      this.currencies.push(item.currency);
+    });
+
+    this.convertForm.get('fromField').enable();
+    this.convertForm.get('toField').enable();
   }
 }

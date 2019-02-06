@@ -16,7 +16,8 @@
   width: 300px;
 }
 
-@include layout-bp(sm) {
+@include layout-bp(lt-md) {
+
   .full-width-lt-sm {
     width: 300px;
   }

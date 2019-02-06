@@ -1,0 +1,35 @@
+<table mat-table [dataSource]="dataSource" style="width: 100%">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="timestamp">
+    <th mat-header-cell *matHeaderCellDef class="col__date"> Date</th>
+    <td mat-cell *matCellDef="let element"> {{element.timestamp | date:'d/m/yyyy  @ hh:mm'}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="Event">
+    <th mat-header-cell *matHeaderCellDef class="col__event"> Event</th>
+    <td mat-cell *matCellDef="let op">
+      <span fxHide.lt-md>Converted an amount of {{op.amount}} from {{op.from.currency}}
+        to {{op.to.currency}}</span>
+      <span fxHide.gt-sm>{{op.amount}} {{op.from.currency}} to {{op.to.currency}}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Actions">
+    <th mat-header-cell *matHeaderCellDef class="col__actions"> Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="showLog(element.id)" color="primary">
+        <mat-icon aria-label="Example icon-button with a heart icon">remove_red_eye</mat-icon>
+        <span fxHide.lt-md>View</span>
+      </button>
+      <button mat-button (click)="emitDeleteEvent(element.id)" color="warn">
+        <mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon>
+        <span fxHide.lt-md>Delete from history </span>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
