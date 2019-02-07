@@ -28,14 +28,11 @@ export class ExchangeHistoryComponent implements OnChanges {
     const currentCurrency: SimpleChange = changes.currency;
 
     if (currentCurrency.currentValue && currentCurrency.currentValue.currency) {
-      console.log('new Currency', currentCurrency.currentValue.currency);
-      // this.buildStatistics(currentCurrency.currentValue);
       this.fetchRatesFor();
     }
   }
 
   fetchRatesFor() {
-    console.log('re fetching', this.dayLength, this.currency);
     this.rates$ = this.currencyService.getExchangeRatesFor(this.dayLength, this.currency);
   }
 }

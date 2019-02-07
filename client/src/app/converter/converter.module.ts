@@ -6,15 +6,18 @@ import { FeaturesModule } from '../features/features.module';
 import { MdmModule } from '../mdm/mdm.module';
 import { StorageModule } from '../storage/storage.module';
 
+import { ConverterFormComponent } from './converter-form/converter-form.component';
 import { ConverterPageComponent } from './converter-page/converter-page.component';
 import { ExchangeHistoryRatesComponent } from './exchange-history-rates/exchange-history-rates.component';
 import { ExchangeHistoryComponent } from './exchange-history/exchange-history.component';
+
 
 @NgModule({
   declarations: [
     ConverterPageComponent,
     ExchangeHistoryComponent,
-    ExchangeHistoryRatesComponent
+    ExchangeHistoryRatesComponent,
+    ConverterFormComponent
   ],
   imports: [
     CommonModule,

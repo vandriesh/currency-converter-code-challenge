@@ -1,0 +1,44 @@
+@import 'variables';
+@import 'layout-bp';
+
+.convert__result {
+  font-weight: 100;
+  letter-spacing: 0.025em;
+  margin-bottom: 32px;
+}
+
+.convert__result__out {
+  color: $pq-secondary-color;
+  font-weight: bold;
+}
+
+.full-width,
+.pq-converter__dropdown .mat-select .mat-form-field-infix {
+  width: 300px;
+}
+
+@include layout-bp(lt-md) {
+
+  .full-width-lt-sm {
+    width: 300px;
+  }
+
+  .rotate-90-lt-sm {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+
+.convert__result {
+  font-weight: 100;
+  letter-spacing: 0.025em;
+  margin-bottom: 32px;
+}
+
+.convert__result__out {
+  color: $pq-secondary-color;
+  font-weight: bold;
+}

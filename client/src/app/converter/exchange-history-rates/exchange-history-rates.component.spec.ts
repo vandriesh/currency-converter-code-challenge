@@ -18,7 +18,7 @@ describe('ExchangeHistoryRatesComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ExchangeHistoryRatesComponent);
     component = fixture.componentInstance;
-    component.dataSource = [];
+    component.rates = [];
     fixture.detectChanges();
   });
 
