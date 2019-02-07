@@ -36,6 +36,22 @@ export function notEmptyNumber(): ValidatorFn {
   };
 }
 
+export function validCurrencyName(currencies): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const { value } = control;
+
+    if (value === '') {
+      return null;
+    }
+
+    if (!currencies[value]) {
+      return { validCurrencyName: { value } };
+    }
+
+    return null;
+  };
+}
+
 @Component({
   selector: 'app-converter-page',
   styleUrls: ['./converter-page.component.scss'],
@@ -50,6 +66,7 @@ export class ConverterPageComponent implements OnInit {
 
   filteredOptionsFrom: Observable<string[]>;
   filteredOptionsTo: Observable<string[]>;
+  toCurrency: Currency = null;
 
   constructor(
     private fb: FormBuilder,
@@ -59,6 +76,13 @@ export class ConverterPageComponent implements OnInit {
 
   ngOnInit() {
     const currenciesStoredLocally = this.storage.get('CURRENCIES');
+    this.toCurrency = { currency: 'EUR' } as Currency;
+
+    this.convertForm = this.fb.group({
+      amount: ['100', [Validators.required, notEmptyNumber()]],
+      fromField: [{ value: 'USD', disabled: true }],
+      toField: [{ value: this.toCurrency.currency, disabled: true }]
+    });
 
     if (currenciesStoredLocally) {
       this.initForm(currenciesStoredLocally);
@@ -69,12 +93,6 @@ export class ConverterPageComponent implements OnInit {
           this.initForm(currencyRates);
         });
     }
-
-    this.convertForm = this.fb.group({
-      amount: ['100', [Validators.required, notEmptyNumber()]],
-      fromField: [{ value: 'USD', disabled: true }, Validators.required],
-      toField: [{ value: 'EUR', disabled: true }, Validators.required]
-    });
 
     this.filteredOptionsFrom = this.convertForm.controls[
       'fromField'
@@ -161,6 +179,10 @@ export class ConverterPageComponent implements OnInit {
     return `1 ${leftCurrency.currency} = ${rate} ${rightCurrency.currency}`;
   }
 
+  onChange(value: string) {
+    this.toCurrency = this.currencyRates[value];
+  }
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -193,7 +215,16 @@ export class ConverterPageComponent implements OnInit {
       this.currencies.push(item.currency);
     });
 
+    const currencyValidator = validCurrencyName(this.currencyRates);
+
     this.convertForm.get('fromField').enable();
+    this.convertForm
+      .get('fromField')
+      .setValidators([currencyValidator, Validators.required]);
+
     this.convertForm.get('toField').enable();
+    this.convertForm
+      .get('toField')
+      .setValidators([currencyValidator, Validators.required]);
   }
 }

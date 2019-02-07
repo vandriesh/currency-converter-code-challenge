@@ -7,9 +7,9 @@
             <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center" fxLayoutGap="10px">
                 <div>
                     <mat-form-field class="full-width-lt-sm">
-                        <input matInput placeholder="Amount" formControlName="amount" class="form__field" />
+                        <input matInput placeholder="Amount" formControlName="amount" class="form__field" required />
                         <mat-error *ngIf="convertForm.controls['amount'].hasError('required')">
-                            Amount is required
+                            This field is required
                         </mat-error>
                         <mat-error *ngIf="convertForm.controls['amount'].hasError('notEmptyNumber')">
                             Amount should be number
@@ -19,12 +19,21 @@
                 <div class="pq-converter__dropdown" fxFlex>
                     <mat-form-field class="full-width">
                         <input type="text" placeholder="From" aria-label="Currency" matInput formControlName="fromField"
+                            required
                             [matAutocomplete]="fromAutocomplete">
                         <mat-autocomplete autoActiveFirstOption #fromAutocomplete="matAutocomplete">
                             <mat-option *ngFor="let option of filteredOptionsFrom | async" [value]="option">
                                 {{option}}
                             </mat-option>
                         </mat-autocomplete>
+                        <mat-error *ngIf="convertForm.controls['fromField'].hasError('required')">
+                            This field is required
+                        </mat-error>
+
+                        <mat-error *ngIf="convertForm.controls['fromField'].hasError('validCurrencyName')">
+                            This is not valid currency
+                        </mat-error>
+
                     </mat-form-field>
                 </div>
                 <div fxFlex fxLayoutAlign="center">
@@ -35,12 +44,23 @@
                 <div class="pq-converter__dropdown" fxFlex>
                     <mat-form-field class="full-width">
                         <input type="text" placeholder="To" aria-label="Currency" matInput formControlName="toField"
+                            required
                             [matAutocomplete]="toAutocomplete">
-                        <mat-autocomplete autoActiveFirstOption #toAutocomplete="matAutocomplete">
+                        <mat-autocomplete autoActiveFirstOption
+                            (optionSelected)="onChange($event.option.value)"
+                            #toAutocomplete="matAutocomplete">
                             <mat-option *ngFor="let option of filteredOptionsTo | async" [value]="option">
                                 {{option}}
                             </mat-option>
                         </mat-autocomplete>
+                        <mat-error *ngIf="convertForm.controls['toField'].hasError('required')">
+                            This field is required
+                        </mat-error>
+
+                        <mat-error *ngIf="convertForm.controls['toField'].hasError('validCurrencyName')">
+                            This is not valid currency
+                        </mat-error>
+
                     </mat-form-field>
                 </div>
                 <button
@@ -66,5 +86,6 @@
             {{displayFromRate('toField', 'fromField')}}
         </div>
     </div>
-    <!--<hr class="section__delimiter" />-->
+    <hr class="section__delimiter" />
+    <app-exchange-history [currency]="toCurrency"></app-exchange-history>
 </div>

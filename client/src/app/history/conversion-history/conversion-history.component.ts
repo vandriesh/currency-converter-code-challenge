@@ -11,13 +11,13 @@ export class ConversionHistoryComponent implements OnInit {
   displayedColumns = ['timestamp', 'Event', 'Actions'];
 
   @Input() dataSource: CurrencyOperation[];
-  @Output() onDelete: EventEmitter<string> = new EventEmitter();
+  @Output() deleteEventEmitter: EventEmitter<string> = new EventEmitter();
   constructor() {}
 
   ngOnInit() {}
 
   emitDeleteEvent(id: string) {
-    this.onDelete.emit(id);
+    this.deleteEventEmitter.emit(id);
   }
 
   showLog(id: any) {

@@ -1,0 +1,9 @@
+.exchange_history_table {
+  width: 100%;
+}
+
+.exchange_history_table__placeholder {
+  overflow: auto;
+  max-height: 440px;
+  flex: 1;
+}

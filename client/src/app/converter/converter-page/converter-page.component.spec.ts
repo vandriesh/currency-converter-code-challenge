@@ -4,6 +4,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CurrenciesService } from '../../features/currencies/currencies.service';
 import { FeaturesModule } from '../../features/features.module';
 import { MdmModule } from '../../mdm/mdm.module';
+import { ExchangeHistoryRatesComponent } from '../exchange-history-rates/exchange-history-rates.component';
+import { ExchangeHistoryComponent } from '../exchange-history/exchange-history.component';
 
 import {
   ConverterPageComponent,
@@ -16,7 +18,11 @@ describe('ConverterPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ConverterPageComponent],
+      declarations: [
+        ConverterPageComponent,
+        ExchangeHistoryComponent,
+        ExchangeHistoryRatesComponent
+      ],
       imports: [ReactiveFormsModule, MdmModule, FeaturesModule],
       providers: [CurrenciesService]
     }).compileComponents();

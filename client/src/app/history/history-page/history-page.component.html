@@ -1,10 +1,8 @@
-<div class="container">
-    <div fxLayout="row" class="content__row">
+<div class="container" fxLayout="column">
+    <div class="content__row">
         <h1 class="mat-display-2 page__header">Conversion history</h1>
     </div>
-    <div fxLayout="row" class="history__table mat-elevation-z2">
-        <app-conversion-history [dataSource]="dataSource"
-            (onDelete)="deleteHandler($event)"
-            class="history__placeholder"></app-conversion-history>
-    </div>
+
+    <app-conversion-history [dataSource]="dataSource"
+        (deleteEventEmitter)="deleteHandler($event)"></app-conversion-history>
 </div>

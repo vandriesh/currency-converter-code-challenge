@@ -1,19 +1,22 @@
-@import "~@angular/flex-layout/mq";
+@import "layout-bp";
 
 .container {
   margin: 0 auto;
-  width: 1024px;
-
+  width: 100%;
+  padding: 0 16px;
 }
 
-@include layout-bp(xs) {
+@include layout-bp(gt-md) {
   .container {
-    width: 100%;
+    width: 1024px;
+    padding: 0;
   }
 }
-@include layout-bp(sm) {
+
+@include layout-bp(gt-gl) {
   .container {
-    width: 100%;
+    width: 1280px;
+    padding: 0;
   }
 }
 
@@ -22,9 +25,47 @@
 }
 
 .content__section {
-  margin-bottom: 50px;
+  margin-bottom: 32px;
 }
 
-.content__row {
-  padding: 0 10px;
+.section__header {
+  margin-bottom: 32px;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+
+.page__header {
+  font-weight: 700;
+  font-size: 48px;
+  margin-top: 45px;
+  margin-bottom: 54px;
+  letter-spacing: 0.03em;
+}
+
+.pq-button__icon {
+  padding: 0 !important;
+  min-width: 36px !important;
+  height: 36px;
+  color: $pq-primary-color
+}
+
+
+.text--center {
+  text-align: center;
+}
+
+.section__delimiter {
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom:  1px solid #eee;
+  width: 100%;
+  margin: 32px 0;
+}
+
+.mat-header-row .mat-header-cell {
+  color: $pq-table-header-text-color;
+  font-size: 16px;
+  font-weight: normal;
 }

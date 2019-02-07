@@ -1,4 +1,4 @@
-@import '~@angular/flex-layout/mq';
+@import 'layout-bp';
 
 @include layout-bp(md) {
   .col__date {
@@ -71,4 +71,14 @@ th.mat-header-cell:first-of-type {
 
 .mat-row {
   height: 42px;
+}
+
+.conversion_history_table {
+  width: 100%;
+}
+
+.conversion_history_table__placeholder {
+  overflow: auto;
+  max-height: 440px;
+  flex: 1;
 }
