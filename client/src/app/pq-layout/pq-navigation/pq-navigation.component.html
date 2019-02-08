@@ -27,7 +27,7 @@
                 </button>
                 <mat-icon color="primary" style="padding-left: 20px">youtube_searched_for</mat-icon>
                 <span class="logo__text">Currency<span class="logo__text_2nd_part">Exchange</span></span>
-                <ul class="pq-navigation" fxLayoutAlign fxHide.xs>
+                <ul class="pq-navigation" fxLayoutAlign fxHide.xs [fxHide]="!logged">
                     <li *ngFor="let menuItem of menu"
                         class="pq-navigation__item__placeholder"
                         routerLinkActive="pq-navigation__item__placeholder--active"
