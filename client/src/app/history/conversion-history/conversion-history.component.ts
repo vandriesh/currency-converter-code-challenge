@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CurrencyOperation } from '../../features/currencies/currencies.service';
 
@@ -12,7 +13,8 @@ export class ConversionHistoryComponent implements OnInit {
 
   @Input() dataSource: CurrencyOperation[];
   @Output() deleteEventEmitter: EventEmitter<string> = new EventEmitter();
-  constructor() {}
+
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
@@ -21,6 +23,6 @@ export class ConversionHistoryComponent implements OnInit {
   }
 
   showLog(id: any) {
-    console.log(`clicked on operation ${id}`);
+    this.router.navigate(['/converter', id]);
   }
 }

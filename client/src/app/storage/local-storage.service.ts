@@ -83,9 +83,7 @@ export class LocalStorageService {
     };
 
     const ops = this.get('CURRENCY_OPERATIONS');
-
     ops.unshift(op);
-
     this.save('CURRENCY_OPERATIONS', ops);
   }
 

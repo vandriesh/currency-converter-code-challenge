@@ -5,6 +5,7 @@
     <div>
 
         <app-converter-form
+            [existingOperation]="existingOperation$ | async"
             [rates]="currencyRates$ | async"
             (submitEvent)="onSubmit($event)"
             (toFieldChange)="updateExchangeHistory($event)"></app-converter-form>

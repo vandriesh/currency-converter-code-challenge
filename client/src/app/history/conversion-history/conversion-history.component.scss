@@ -82,3 +82,13 @@ th.mat-header-cell:first-of-type {
   max-height: 440px;
   flex: 1;
 }
+
+.operation__actions {
+  button { display: none}
+
+  &:hover {
+    button {
+      display: inline-block;
+    }
+  }
+}

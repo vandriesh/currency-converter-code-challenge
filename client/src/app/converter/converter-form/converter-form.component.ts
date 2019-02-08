@@ -20,7 +20,8 @@ import { map, startWith } from 'rxjs/operators';
 
 import {
   CurrenciesService,
-  Currency
+  Currency,
+  CurrencyOperation
 } from '../../features/currencies/currencies.service';
 
 const notEmptyAndValid = (control: AbstractControl) =>
@@ -73,6 +74,7 @@ export function notEmptyNumber(): ValidatorFn {
 })
 export class ConverterFormComponent implements OnInit, OnChanges {
   @Input() rates: Currency[] = [];
+  @Input() existingOperation: CurrencyOperation = null;
   @Output() toFieldChange: EventEmitter<Currency> = new EventEmitter<
     Currency
   >();
@@ -89,9 +91,7 @@ export class ConverterFormComponent implements OnInit, OnChanges {
     [key: string]: Currency;
   } = {};
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit() {
+  constructor(private fb: FormBuilder) {
     this.defaultToFieldValue = { currency: 'EUR' } as Currency;
 
     this.convertForm = this.fb.group({
@@ -99,6 +99,12 @@ export class ConverterFormComponent implements OnInit, OnChanges {
       fromField: [{ value: 'USD', disabled: true }],
       toField: [{ value: this.defaultToFieldValue.currency, disabled: true }]
     });
+  }
+
+  ngOnInit() {
+    if (this.existingOperation) {
+      this.initFormWith(this.existingOperation);
+    }
   }
 
   emitFormData() {
@@ -128,7 +134,7 @@ export class ConverterFormComponent implements OnInit, OnChanges {
   }
 
   set(amount: string, value) {
-    if (value !== '?') {
+    if (value && value !== '?') {
       return this.convertForm.controls[amount].setValue(value);
     }
   }
@@ -148,8 +154,9 @@ export class ConverterFormComponent implements OnInit, OnChanges {
     if (this.validForm() && fromCurrency !== null && toCurrency !== null) {
       return this.round(
         CurrenciesService.getRate(fromCurrency, toCurrency) *
-        parseInt(this.convertForm.controls['amount'].value, 10)
-      , 3);
+          parseInt(this.convertForm.controls['amount'].value, 10),
+        3
+      );
     }
 
     return '?';
@@ -176,10 +183,14 @@ export class ConverterFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const rates: SimpleChange = changes.rates;
+    const existingOperation: SimpleChange = changes.existingOperation;
 
     if (rates.currentValue && rates.currentValue.length) {
       this.initForm();
     }
+//    if (existingOperation && existingOperation.currentValue) {
+      // this.initFormWith(existingOperation.currentValue);
+  //  }
   }
 
   emitToFieldSelected(value: any) {
@@ -210,6 +221,12 @@ export class ConverterFormComponent implements OnInit, OnChanges {
 
   private round(num: number, digitCount: number) {
     return Number(num).toFixed(digitCount);
+  }
+
+  private initFormWith(values: CurrencyOperation) {
+    this.set('amount', values.amount);
+    this.set('fromField', values.from.currency);
+    this.set('toField', values.to.currency);
   }
 
   private initForm() {

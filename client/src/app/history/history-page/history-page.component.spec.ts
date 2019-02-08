@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MdmModule } from '../../mdm/mdm.module';
 import { StorageModule } from '../../storage/storage.module';
@@ -13,7 +14,7 @@ describe('HistoryPageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HistoryPageComponent, ConversionHistoryComponent ],
-      imports: [MdmModule, StorageModule]
+      imports: [MdmModule, StorageModule, RouterTestingModule]
     })
     .compileComponents();
   }));

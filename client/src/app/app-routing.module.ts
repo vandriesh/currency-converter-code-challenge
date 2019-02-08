@@ -14,12 +14,17 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo : '/converter'
+    redirectTo: '/converter'
   },
   {
     canActivate: [AuthGuard],
     component: ConverterPageComponent,
     path: 'converter'
+  },
+  {
+    canActivate: [AuthGuard],
+    component: ConverterPageComponent,
+    path: 'converter/:id'
   },
   {
     canActivate: [AuthGuard],

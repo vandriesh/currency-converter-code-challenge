@@ -1,10 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {
-  CurrenciesService,
-  Currency
-} from '../../features/currencies/currencies.service';
+import { CurrenciesService } from '../../features/currencies/currencies.service';
 import { MdmModule } from '../../mdm/mdm.module';
 import { ExchangeHistoryRatesComponent } from '../exchange-history-rates/exchange-history-rates.component';
 
