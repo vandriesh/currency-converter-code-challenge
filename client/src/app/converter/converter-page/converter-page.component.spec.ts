@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { CurrenciesService } from '../../features/currencies/currencies.service';
 import { FeaturesModule } from '../../features/features.module';
@@ -10,7 +11,7 @@ import { ExchangeHistoryComponent } from '../exchange-history/exchange-history.c
 
 import { ConverterPageComponent } from './converter-page.component';
 
-xdescribe('ConverterPageComponent', () => {
+describe('ConverterPageComponent', () => {
   let component: ConverterPageComponent;
   let fixture: ComponentFixture<ConverterPageComponent>;
 
@@ -23,7 +24,7 @@ xdescribe('ConverterPageComponent', () => {
         ConverterFormComponent
       ],
 
-      imports: [ReactiveFormsModule, MdmModule, FeaturesModule],
+      imports: [ReactiveFormsModule, MdmModule, FeaturesModule, RouterModule.forRoot([])],
       providers: [CurrenciesService]
     }).compileComponents();
   }));
